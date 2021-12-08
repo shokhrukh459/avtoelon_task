@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
                  child: InkWell(
                    onTap: ()=>{
                      Navigator.push(context, MaterialPageRoute(
-                       builder: (context)=> SecondPage()
+                       builder: (context)=> SecondPage(data:Order.orders[index],)
                      ) )
                    } ,
                    child: Card(
@@ -82,19 +82,27 @@ class MyApp extends StatelessWidget {
   }
 }
 class SecondPage extends StatelessWidget {
-  const SecondPage({Key? key}) : super(key: key);
+  final Order data;
+  const SecondPage({required this.data});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("second page"),
+        title: Text("Details of this car"),
 
       ),
       body: Container(
         child: Column(
           children: [
-            Image.asset("assets/images/cobalt.jpg"),
+            Image.asset(data.imageUrl),
+            SizedBox(height: 20,),
+            Text(data.name, style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+            ),),
+            SizedBox(height: 12 ,),
+            Text(data.info)
 
           ],
         ),
