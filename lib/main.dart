@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar:AppBar(
 
@@ -33,42 +34,70 @@ class MyApp extends StatelessWidget {
               itemBuilder: (BuildContext context, int index){
                return Padding(
                  padding: const EdgeInsets.all(4.0),
-                 child: Card(
-                   child: Row(
-                     crossAxisAlignment: CrossAxisAlignment.start,
-                     children: [
-                       Expanded(
-                         flex: 1,
-                           child: Image.asset(Order.orders[index].imageUrl) ),
-                       Expanded(
+                 child: InkWell(
+                   onTap: ()=>{
+                     Navigator.push(context, MaterialPageRoute(
+                       builder: (context)=> SecondPage()
+                     ) )
+                   } ,
+                   child: Card(
+                     child: Row(
+                       crossAxisAlignment: CrossAxisAlignment.start,
+                       children: [
+                         Expanded(
                            flex: 1,
-                           child: Padding(
-                             padding: const EdgeInsets.all(8.0),
-                             child: Column(
-                               mainAxisAlignment: MainAxisAlignment.start,
-                               crossAxisAlignment: CrossAxisAlignment.start,
-                               children: [
-                                 Text(Order.orders[index].name,
+                             child: Image.asset(Order.orders[index].imageUrl) ),
+                         Expanded(
+                             flex: 1,
+                             child: Padding(
+                               padding: const EdgeInsets.all(8.0),
+                               child: Column(
+                                 mainAxisAlignment: MainAxisAlignment.start,
+                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                 children: [
+                                   Text(Order.orders[index].name,
+                                     style: TextStyle(
+                                       fontWeight: FontWeight.bold,
+                                       fontSize: 20,
+                                     ),),
+                                   SizedBox(height: 10,),
+                                   Text(Order.orders[index].info),
+                                   SizedBox(height: 10,),
+                                   Text(Order.orders[index].date,
                                    style: TextStyle(
-                                     fontWeight: FontWeight.bold,
-                                     fontSize: 20,
-                                   ),),
-                                 SizedBox(height: 10,),
-                                 Text(Order.orders[index].info),
-                                 SizedBox(height: 10,),
-                                 Text(Order.orders[index].date,
-                                 style: TextStyle(
-                                   color: Colors.grey
-                                 ),)
-                               ],
-                             ),
-                           ) )
-                     ],
+                                     color: Colors.grey
+                                   ),)
+                                 ],
+                               ),
+                             ) )
+                       ],
+                     ),
                    ),
                  ),
                );
             },
             ),
+      ),
+    );
+  }
+}
+class SecondPage extends StatelessWidget {
+  const SecondPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("second page"),
+
+      ),
+      body: Container(
+        child: Column(
+          children: [
+            Image.asset("assets/images/cobalt.jpg"),
+
+          ],
+        ),
       ),
     );
   }
