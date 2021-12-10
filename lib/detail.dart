@@ -154,6 +154,10 @@ class DetailPage extends StatelessWidget {
                           ),
                         ],
                       ),
+
+
+
+                      ///
                       SizedBox(
                         height: 10,
                       ),
