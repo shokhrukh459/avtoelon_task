@@ -1,8 +1,9 @@
 import 'package:avto_elon_task3/models/order.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'detail.dart';
 
-void main() {
+void main(){
   runApp(MyApp());
 }
 class MyApp extends StatelessWidget {
@@ -11,103 +12,80 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar:AppBar(
-
-          leading: Icon(Icons.menu, size: 28,),
-          title: Text("Avtoelon", style: TextStyle(
-            fontSize: 28,
-          ),),
+        appBar: AppBar(
+          leading: Icon(
+            Icons.menu,
+          ),
+          title: Text("Avtoelon"),
           actions: [
-
-            Icon(Icons.add_circle_outline, size: 28, color: Colors.white54),
-            SizedBox(width: 24,),
-            Icon(Icons.monetization_on_outlined, size: 28, color: Colors.white54,),
-            SizedBox(width: 24,),
-            Icon(Icons.search,size: 28, color: Colors.white54),
+            Icon(Icons.add_circle_outline),
             SizedBox(width: 16,),
+            Icon(Icons.monetization_on_outlined),
+            SizedBox(width: 16,),
+            Icon(Icons.search),
+            SizedBox(width: 16),
           ],
         ),
-            body: ListView.builder(
-              itemCount: Order.orders.length,
-              itemBuilder: (BuildContext context, int index){
-               return Padding(
-                 padding: const EdgeInsets.all(4.0),
-                 child: InkWell(
-                   onTap: ()=>{
-                     Navigator.push(context, MaterialPageRoute(
-                       builder: (context)=> SecondPage(data:Order.orders[index],)
-                     ) )
-                   } ,
-                   child: Card(
-                     child: Row(
-                       crossAxisAlignment: CrossAxisAlignment.start,
-                       children: [
-                         Expanded(
-                           flex: 1,
-                             child: Image.asset(Order.orders[index].imageUrl) ),
-                         Expanded(
-                             flex: 1,
-                             child: Padding(
-                               padding: const EdgeInsets.all(8.0),
-                               child: Column(
-                                 mainAxisAlignment: MainAxisAlignment.start,
-                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                 children: [
-                                   Text(Order.orders[index].name,
-                                     style: TextStyle(
-                                       fontWeight: FontWeight.bold,
-                                       fontSize: 20,
-                                     ),),
-                                   SizedBox(height: 10,),
-                                   Text(Order.orders[index].info),
-                                   SizedBox(height: 10,),
-                                   Text(Order.orders[index].date,
-                                   style: TextStyle(
-                                     color: Colors.grey
-                                   ),)
-                                 ],
-                               ),
-                             ) )
-                       ],
-                     ),
-                   ),
-                 ),
-               );
-            },
-            ),
-      ),
+        body: ListView.builder(
+            itemCount: Order.orders.length,
+            itemBuilder: (BuildContext context, int index){
+              return InkWell(
+                onTap: () => {
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => DetailPage(data: Order.orders[index],)
+                  )
+                  )
+                },
+                child: Card(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                          flex: 3,
+                          child: Image.asset(Order.orders[index].imageUrl)),
+                      Expanded(
+                          flex: 4,
+                          child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(Order.orders[index].name, style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 24,
+                            ),),
+                            Row(
+                              children: [
+                                Text("${Order.orders[index].year}y, "),
+                                Text("${Order.orders[index].type}, "),
+                                Text("${Order.orders[index].capacity}, "),
+                                Text("${Order.orders[index].machinism}, "),
+                              ],
+                                       ),
+                            Text(Order.orders[index].petrol),
+                            SizedBox(height: 4,),
+                            Row(
+                              children: [
+                                Text("${Order.orders[index].city} ", style: TextStyle(
+                                  color: Colors.grey,
+                                ),),
+                                Text("${Order.orders[index].date} ", style: TextStyle(
+                                  color: Colors.grey,
+                                ),),
+                              ],
+                            )
+
+                          ],
+                        ),
+                      ))
+                    ],
+                  ),
+
+                ),
+              );
+            }),
+      ) ,
     );
   }
 }
-class SecondPage extends StatelessWidget {
-  final Order data;
-  const SecondPage({required this.data});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Details of this car"),
-
-      ),
-      body: Container(
-        child: Column(
-          children: [
-            Image.asset(data.imageUrl),
-            SizedBox(height: 20,),
-            Text(data.name, style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
-            ),),
-            SizedBox(height: 12 ,),
-            Text(data.info)
-
-          ],
-        ),
-      ),
-    );
-  }
-}
-
