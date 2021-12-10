@@ -156,8 +156,6 @@ class DetailPage extends StatelessWidget {
                           ],
                         ),
 
-
-
                         ///
                         SizedBox(
                           height: 10,
@@ -231,27 +229,26 @@ class DetailPage extends StatelessWidget {
                   color: Colors.grey.shade200,
                 ),
                 SizedBox(
-                  height: 16 ,
+                  height: 16,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                        child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Optsiyalar va xarakteristkalar",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24,
-                            ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Optsiyalar va xarakteristkalar",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
                           ),
-                          Text(data.info)
-                        ],
-                      ),
+                        ),
+                        Text(data.info)
+                      ],
                     ),
                   ),
-
+                ),
               ],
             ),
           ),
